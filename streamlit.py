@@ -20,7 +20,7 @@ if st.sidebar.button("Tahmin Yap"):
     if input_1 and input_2 and input_3 and input_4 and input_5:
         prediction = "Örnek Tahmin Sonucu"
 
-    sum = int(input_1) + int(input_2)
+    sum = int(input_1) + int(input_2)+ int(input_3)
 
     # Tahmin sonucunu gösterme
     st.write("Tahmin Sonucu:")
