@@ -25,3 +25,18 @@ if st.sidebar.button("Tahmin Yap"):
     # Tahmin sonucunu gösterme
     st.write("Tahmin Sonucu:")
     st.write(sum)
+
+
+
+
+veri_listesi = ["Seçenek 1", "Seçenek 2", "Seçenek 3", "Seçenek 4"]
+
+# Streamlit uygulama başlatma
+st.title("ComboBox Örneği")
+st.write("Lütfen bir seçenek seçin:")
+
+# ComboBox (selectbox) oluşturma
+secilen_veri = st.selectbox("Seçenekler", veri_listesi)
+
+# Seçilen veriyi gösterme
+st.write("Seçilen veri:", secilen_veri)
