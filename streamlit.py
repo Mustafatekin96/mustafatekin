@@ -40,3 +40,40 @@ secilen_veri = st.selectbox("Seçenekler", veri_listesi)
 
 # Seçilen veriyi gösterme
 st.write("Seçilen veri:", secilen_veri)
+
+
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Örnek bir Pandas DataFrame oluşturma
+veri = {
+    'Tarih': ['2023-09-01', '2023-09-02', '2023-09-03', '2023-09-04'],
+    'Değer': [10, 20, 15, 30]
+}
+
+df = pd.DataFrame(veri)
+
+# Streamlit uygulama başlatma
+st.title("Grafik Gösterme Örneği")
+
+# Düğmeye tıklanıp tıklanmadığını kontrol etmek için bir boolean değişken
+tiklandi_mi = st.button("Grafiği Göster")
+
+# Eğer düğmeye tıklanırsa
+if tiklandi_mi:
+    # Verileri kullanarak bir çizgi grafiği oluşturma
+    fig, ax = plt.subplots()
+    ax.plot(df['Tarih'], df['Değer'], marker='o')
+    ax.set_xlabel('Tarih')
+    ax.set_ylabel('Değer')
+    ax.set_title('Örnek Çizgi Grafiği')
+
+    # Grafiği gösterme
+    st.pyplot(fig)
+
+
+
+
+
+
