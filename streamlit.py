@@ -1,10 +1,7 @@
 import streamlit as st
 
 
-excel_path = r'makine saat-eylül-ekim.xlsx'
-
-# Excel dosyasını okuma
-df = pd.read_excel(excel_path)
+df = pd.read_excel(makine saat-eylül-ekim.xlsx)
 st.dataframe(df.head(5))
 
 st.button('Hit me')
