@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-excel_path = 'makine saat-eylül-ekim.xlsx'
+excel_path = r'makine saat-eylül-ekim.xlsx'
 
 # Excel dosyasını okuma
 df = pd.read_excel(excel_path)
