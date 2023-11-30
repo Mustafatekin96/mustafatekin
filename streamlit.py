@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-df = pd.read_csv(, sep=';')  # Sütunlar sekme (tab) ile ayrılmış
+df = pd.read_csv("https://github.com/Mustafatekin96/mustafatekin/blob/33220848dffb043a8ac372a0876763e9b87b648b/customers.csv", sep=';')  # Sütunlar sekme (tab) ile ayrılmış
 
 # Multiselect bileşeni
 selected_values = st.multiselect('Multiselect', [1, 2, 3])
