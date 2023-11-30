@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import openpyxl
 # Streamlit uygulamasını başlat
 st.title("Excel Okuma Uygulaması")
 
