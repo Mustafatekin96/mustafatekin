@@ -1,5 +1,12 @@
 import streamlit as st
 
+
+excel_path = r'\\C:\Users\tekin\Desktop.xlsx'
+
+# Excel dosyasını okuma
+df = pd.read_excel(excel_path)
+st.dataframe(df.head(5))
+
 st.button('Hit me')
 
 st.checkbox('Check me out')
