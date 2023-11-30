@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_excel("makine saat-eylül-ekim.xlsx")
-st.dataframe(df.head(5))
+github_url = 'https://raw.githubusercontent.com/username/repo/main/data.csv'
+
+# Pandas DataFrame oluşturma
+df = pd.read_csv(github_url)
