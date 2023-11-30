@@ -1,16 +1,17 @@
 import streamlit as st
 import pandas as pd
-df = pd.read_csv("https://raw.githubusercontent.com/Mustafatekin96/mustafatekin/33220848dffb043a8ac372a0876763e9b87b648b/customers.csv", sep=';')  # Sütunlar sekme (tab) ile ayrılmış
 
-# Multiselect bileşeni
-selected_values = st.multiselect('Multiselect', [1, 2, 3])
+# Streamlit uygulamasını başlat
+st.title("Excel Okuma Uygulaması")
 
-# Button bileşeni
-button_clicked = st.button('Hit me')
+# Dosya seçme aracı ekleyin
+uploaded_file = st.file_uploader("Excel dosyanızı yükleyin", type=["xlsx", "xls"])
 
-# Seçilen değerleri yazdırma
-st.write('Selected Values:', selected_values)
+# Dosya yüklendiyse
+if uploaded_file is not None:
+    # Excel dosyasını oku
+    df = pd.read_excel(uploaded_file)
 
-# Butona tıklanıp tıklanmadığını kontrol etme
-if button_clicked:
-    st.write('Button Clicked!')
+    # Veri çerçevesini görüntüle
+    st.write("Yüklenen Excel Dosyası:")
+    st.write(df)
