@@ -5,7 +5,7 @@ import pandas as pd
 st.title("Excel Okuma Uygulaması")
 
 # Dosya seçme aracı ekleyin
-uploaded_file = st.file_uploader("Excel dosyanızı yükleyin", type=["xlsx", "xls","csv"])
+uploaded_file = st.file_uploader("Excel dosyanızı yükleyin", type=["csv"])
 
 # Dosya yüklendiyse
 if uploaded_file is not None:
