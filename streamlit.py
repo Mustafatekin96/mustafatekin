@@ -14,4 +14,7 @@ if uploaded_file is not None:
 
     # Veri çerçevesini görüntüle
     st.write("Yüklenen Excel Dosyası:")
+    df = pd.DataFrame(df)
     st.write(df)
+
+
