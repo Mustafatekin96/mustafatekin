@@ -7,7 +7,7 @@ st.title("Sipariş Oluşturma")
 uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xls"])
 uploaded_file1 = st.file_uploader("Kanban Stoklarını yükleyin", type=["xlsx"])
 
-if uploaded_file is not None:
+if uploaded_file1 is not None:
     df = pd.read_excel(uploaded_file)
     dfkanban = pd.read_excel(uploaded_file1)
     dfkanban = dfkanban[["KOD", "STOK"]]
