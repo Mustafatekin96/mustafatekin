@@ -31,3 +31,15 @@
     8501
   ]
 }
+{
+  "name": "Python",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "settings": {
+    "pythonPath": "/usr/local/bin/python"
+  },
+  "extensions": ["ms-python.python"],
+  "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt"
+}
