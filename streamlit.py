@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import base64
+from io import BytesIO
 
 uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xlsx"])
 
@@ -170,15 +171,16 @@ if uploaded_file is not None:
 
 
 
+# "Excel'e Aktar" adlı bir düğme oluştur
 if st.button('Excel\'e Aktar'):
-    # DataFrame'i Excel dosyasına yaz
-    excel_data = df.to_excel(index=False)
-
+    # DataFrame'i BytesIO nesnesine yaz
+    excel_data = BytesIO()
+    df.to_excel(excel_data, index=False, engine='xlsxwriter')
+    
     # BytesIO nesnesini kullanarak Excel dosyasını indir
-    b64 = base64.b64encode(excel_data).decode()
+    b64 = base64.b64encode(excel_data.getvalue()).decode()
     href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="dataframe.xlsx">Excel\'i İndir</a>'
     st.markdown(href, unsafe_allow_html=True)
-
 
     st.write(pivot_df)
     st.write(df)
