@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import os
+
 
 uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xlsx"])
 
@@ -167,23 +167,21 @@ if uploaded_file is not None:
     pivot_df = pd.merge(pivot_df, dfstockname, how="left", left_on="MALZEME", right_on="STOK_KODU")
     pivot_df.drop(columns=["STOK_KODU", "Stok Kodu"])
 
+
+
+
     # Klasör seçme
-    folder_location = st.text_input('DataFrame\'inizi içine atmak istediğiniz klasörü seçin', 'path/to/your/folder')
+    # Klasör seçme
+    if st.button('Excel\'e Aktar'):
+        # Kullanıcı düğmeye tıkladığında Excel dosyasını oluştur
+        df.to_excel("dataframe.xlsx", index=False)
 
-    # Excel dosyasını oluşturma ve DataFrame'i klasöre atma butonu
-    if st.button('Excel Dosyasını Oluştur ve DataFrame\'i Klasöre At'):
-        # Dosyanın oluşturulacağı konumu belirle
-        file_location = os.path.join(folder_location, 'dataframe.xlsx')
+        # Kullanıcıya başarı mesajını göster
+        st.success('Excel dosyası başarıyla oluşturuldu!')
 
-        # DataFrame'i Excel dosyasına yaz
-        df.to_excel(file_location, index=False)
-
-        # Kullanıcıya bilgi ver
-        st.success(f'DataFrame\'inizi [buradan]({file_location}) indirebilir ve klasörde kontrol edebilirsiniz.')
+        # Oluşturulan Excel dosyasının bir bağlantısını ekleyebilirsiniz
+        st.markdown("[İndirilen Excel Dosyası](dataframe.xlsx)")
 
 
     st.write(pivot_df)
     st.write(df)
-
-
-
