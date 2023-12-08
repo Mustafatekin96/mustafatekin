@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import os
 
 uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xlsx"])
 
@@ -166,14 +166,20 @@ if uploaded_file is not None:
     pivot_df = pd.merge(pivot_df, dflocal, how="left", left_on="MALZEME", right_on="Stok Kodu")
     pivot_df = pd.merge(pivot_df, dfstockname, how="left", left_on="MALZEME", right_on="STOK_KODU")
     pivot_df.drop(columns=["STOK_KODU", "Stok Kodu"])
-    if st.button('Excel Dosyasını İndir'):
-        # DataFrame'i Excel dosyasına yaz
-        df.to_excel('Bulaşık Sipariş İhtiyaç Listesi.xlsx', index=False)
-        pivot_df.to_excel('Bulaşık Planı.xlsx', index=False)
 
-        # Kullanıcıya indirme bağlantısı sağla
-        st.success('Excel dosyanızı indirildi ')
-        st.success('Excel dosyanızı indirildi ')
+    # Klasör seçme
+    folder_location = st.text_input('DataFrame\'inizi içine atmak istediğiniz klasörü seçin', 'path/to/your/folder')
+
+    # Excel dosyasını oluşturma ve DataFrame'i klasöre atma butonu
+    if st.button('Excel Dosyasını Oluştur ve DataFrame\'i Klasöre At'):
+        # Dosyanın oluşturulacağı konumu belirle
+        file_location = os.path.join(folder_location, 'dataframe.xlsx')
+
+        # DataFrame'i Excel dosyasına yaz
+        df.to_excel(file_location, index=False)
+
+        # Kullanıcıya bilgi ver
+        st.success(f'DataFrame\'inizi [buradan]({file_location}) indirebilir ve klasörde kontrol edebilirsiniz.')
 
 
     st.write(pivot_df)
