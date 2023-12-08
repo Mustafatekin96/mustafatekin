@@ -8,8 +8,10 @@ uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xlsx"]
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file,sheet_name="bakiye")
     dfkanban = pd.read_excel(uploaded_file,sheet_name="kanban")
-    dfsonirsaliye = pd.read_excel(uploaded_file,sheet_name="Sayfa3")
+    dfsonirsaliye = pd.read_excel(uploaded_file,sheet_name="irsaliye")
     dfdepobakiye = pd.read_excel(uploaded_file,sheet_name="depo")
+    dflocal = pd.read_excel(uploaded_file, sheet_name="depo")
+    dfstockname = pd.read_excel(uploaded_file, sheet_name="enj-byhn")
 
     df = df[~df["KODU VE TANIMI"].str.contains("KPG")]
 
@@ -151,7 +153,22 @@ if uploaded_file is not None:
 
     pivot_df = df.pivot_table(values='Sipariş Miktarı', index='MALZEME', columns='Tarih', aggfunc='sum', fill_value=0)
 
-    df.to_excel("ihtiyaç bulaşık.xlsx")
+    pivot_df.reset_index(inplace=True)
+
+    dfstockname = dfstockname[["STOK_KODU", "STOK_ADI"]]
+    dflocal = dflocal[["Stok Kodu", "yer"]]
+    df = pd.merge(df, dflocal, how="left", left_on="MALZEME", right_on="Stok Kodu")
+    df = pd.merge(df, dfstockname, how="left", left_on="MALZEME", right_on="STOK_KODU")
+    df.drop(columns=["Stok Kodu", "STOK_KODU"])
+    df = df[["yer", "MALZEME", "STOK_ADI", "Tarih", "Sipariş Miktarı"]]
+    df['Tarih'] = df['Tarih'].str.strip()
+
+    pivot_df = pd.merge(pivot_df, dflocal, how="left", left_on="MALZEME", right_on="Stok Kodu")
+    pivot_df = pd.merge(pivot_df, dfstockname, how="left", left_on="MALZEME", right_on="STOK_KODU")
+    pivot_df.drop(columns=["STOK_KODU", "Stok Kodu"])
+
+    pivot_df.to_excel("Bulaşık Sipariş İhtiyaç Listesi.xlsx")
+    df.to_excel("Bulaşık Planı.xlsx")
     st.write(pivot_df)
     st.write(df)
 
