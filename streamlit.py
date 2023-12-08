@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import base64
 
 uploaded_file = st.file_uploader("Sipariş Dosyasını Yükleyin", type=["xlsx"])
 
