@@ -166,9 +166,16 @@ if uploaded_file is not None:
     pivot_df = pd.merge(pivot_df, dflocal, how="left", left_on="MALZEME", right_on="Stok Kodu")
     pivot_df = pd.merge(pivot_df, dfstockname, how="left", left_on="MALZEME", right_on="STOK_KODU")
     pivot_df.drop(columns=["STOK_KODU", "Stok Kodu"])
+    if st.button('Excel Dosyasını İndir'):
+        # DataFrame'i Excel dosyasına yaz
+        df.to_excel('Bulaşık Sipariş İhtiyaç Listesi.xlsx', index=False)
+        pivot_df.to_excel('Bulaşık Planı.xlsx', index=False)
 
-    pivot_df.to_excel("Bulaşık Sipariş İhtiyaç Listesi.xlsx")
-    df.to_excel("Bulaşık Planı.xlsx")
+        # Kullanıcıya indirme bağlantısı sağla
+        st.success('Excel dosyanızı indirildi ')
+        st.success('Excel dosyanızı indirildi ')
+
+
     st.write(pivot_df)
     st.write(df)
 
