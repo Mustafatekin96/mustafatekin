@@ -10,8 +10,8 @@ if uploaded_file is not None:
     dfkanban = pd.read_excel(uploaded_file,sheet_name="kanban")
     dfsonirsaliye = pd.read_excel(uploaded_file,sheet_name="irsaliye")
     dfdepobakiye = pd.read_excel(uploaded_file,sheet_name="depo")
-    dflocal = pd.read_excel(uploaded_file, sheet_name="depo")
-    dfstockname = pd.read_excel(uploaded_file, sheet_name="enj-byhn")
+    dflocal = pd.read_excel(uploaded_file, sheet_name="enj-byhn")
+    dfstockname = pd.read_excel(uploaded_file, sheet_name="depo")
 
     df = df[~df["KODU VE TANIMI"].str.contains("KPG")]
 
