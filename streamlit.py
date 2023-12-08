@@ -170,17 +170,14 @@ if uploaded_file is not None:
 
 
 
-    # Klasör seçme
-    # Klasör seçme
-    if st.button('Excel\'e Aktar'):
-        # Kullanıcı düğmeye tıkladığında Excel dosyasını oluştur
-        df.to_excel("dataframe.xlsx", index=False)
+if st.button('Excel\'e Aktar'):
+    # DataFrame'i Excel dosyasına yaz
+    excel_data = df.to_excel(index=False)
 
-        # Kullanıcıya başarı mesajını göster
-        st.success('Excel dosyası başarıyla oluşturuldu!')
-
-        # Oluşturulan Excel dosyasının bir bağlantısını ekleyebilirsiniz
-        st.markdown("[İndirilen Excel Dosyası](dataframe.xlsx)")
+    # BytesIO nesnesini kullanarak Excel dosyasını indir
+    b64 = base64.b64encode(excel_data).decode()
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="dataframe.xlsx">Excel\'i İndir</a>'
+    st.markdown(href, unsafe_allow_html=True)
 
 
     st.write(pivot_df)
